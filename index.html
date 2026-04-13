@@ -8,670 +8,33 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
-
-/* ── TOKENS ── */
 :root {
-  --navy:   #001E60;
-  --red:    #EC1D27;
-  --gold:   #CB8826;
-  --burg:   #8B1A2E;
-  --teal:   #1B4D8E;
-  --white:  #FFFFFF;
-  --off:    #F5F4F0;
-  --lgray:  #E8E7E3;
-  --mgray:  #9A9890;
-  --dgray:  #2D2D2B;
-  --yes-bg: #FFFFFF;
-  --yes-bd: #CB8826;
-  --yes-tx: #2D2D2B;
-  --no-bg:  #F5F4F0;
-  --no-bd:  #8B1A2E;
-  --no-tx:  #2D2D2B;
-  --c-care:  #EC1D27;
-  --c-coord: #001E60;
-  --c-clar:  #CB8826;
-  --c-comm:  #8B1A2E;
-  --c-ci:    #1B4D8E;
-  --panel-w: 42%;
-  --text-w:  58%;
-  --step-h:  95vh;
-  --step-looks: 130vh;
-  --serif:   'DM Serif Display', Georgia, serif;
-  --sans:    'DM Sans', system-ui, sans-serif;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--sans);
-  background: var(--off);
-  color: var(--dgray);
-  font-size: 16px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ── PROGRESS BAR ── */
-#progress-bar {
-  position: fixed;
-  top: 0; left: 0;
-  height: 3px;
-  width: 0%;
-  background: var(--red);
-  z-index: 100;
-  transition: width 0.1s linear;
-}
-
-/* ── HERO ── */
-.hero {
-  min-height: 100vh;
-  background: var(--navy);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 8vw 6vw 10vw;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: "5";
-  position: absolute;
-  right: -2vw; top: -4vw;
-  font-family: var(--serif);
-  font-size: 55vw;
-  color: rgba(255,255,255,0.03);
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
-}
-.hero__label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1.5rem;
-}
-.hero__title {
-  font-family: var(--serif);
-  font-size: clamp(3rem, 9vw, 8rem);
-  color: var(--white);
-  line-height: 0.95;
-  max-width: 14ch;
-  margin-bottom: 2rem;
-}
-.hero__sub {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  color: rgba(255,255,255,0.6);
-  max-width: 38ch;
-  line-height: 1.7;
-  margin-bottom: 3rem;
-}
-.hero__pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.hero__pill {
-  padding: 6px 16px;
-  border: 1px solid rgba(255,255,255,0.2);
-  color: rgba(255,255,255,0.55);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  border-radius: 100px;
-}
-.hero__scroll {
-  position: absolute;
-  bottom: 2.5rem; left: 6vw;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  color: rgba(255,255,255,0.25);
-  text-transform: uppercase;
-  display: flex; align-items: center; gap: 10px;
-}
-.hero__scroll::before {
-  content: '';
-  display: block;
-  width: 24px; height: 1px;
-  background: rgba(255,255,255,0.25);
-}
-
-/* ── SETUP SECTION ── */
-.setup {
-  background: var(--white);
-  padding: 7vw 0 0;
-}
-.setup__inner {
-  max-width: 780px;
-  margin: 0 auto;
-  padding: 0 5vw;
-}
-.setup__label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: var(--mgray);
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--lgray);
-}
-.setup__headline {
-  font-family: var(--serif);
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  color: var(--navy);
-  line-height: 1.15;
-  margin-bottom: 1.5rem;
-}
-.setup__body {
-  font-size: 1.05rem;
-  color: var(--dgray);
-  line-height: 1.75;
-  margin-bottom: 1.2rem;
-}
-.setup__note {
-  font-size: 0.9rem;
-  color: var(--mgray);
-  border-left: 3px solid var(--lgray);
-  padding-left: 1rem;
-  font-style: italic;
-  line-height: 1.65;
-  margin-bottom: 3rem;
-}
-
-/* Values table */
-.values-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 2.5rem 0;
-}
-.values-table th {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--mgray);
-  padding: 0.6rem 1rem;
-  text-align: left;
-  border-bottom: 2px solid var(--lgray);
-}
-.values-table td {
-  padding: 0.75rem 1rem;
-  font-size: 0.95rem;
-  border-bottom: 1px solid var(--lgray);
-  line-height: 1.4;
-}
-.values-table tr:last-child td { border-bottom: none; }
-.values-table .habit-name {
-  font-weight: 700;
-  color: var(--navy);
-}
-.values-table .habit-color {
-  display: inline-block;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  margin-right: 8px;
-  vertical-align: middle;
-}
-.values-table .value-name {
-  color: var(--mgray);
-  font-size: 0.9rem;
-}
-
-/* How to read */
-.how-to-read {
-  background: var(--off);
-  border-radius: 8px;
-  padding: 1.5rem 1.75rem;
-  margin: 2rem 0 3rem;
-}
-.how-to-read__label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--mgray);
-  margin-bottom: 0.8rem;
-}
-.how-to-read__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-}
-.how-to-read__item {
-  font-size: 0.9rem;
-  color: var(--dgray);
-  line-height: 1.5;
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-.how-to-read__item::before {
-  content: '';
-  display: block;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--gold);
-  flex-shrink: 0;
-  margin-top: 6px;
-}
-
-/* ── KNOTS SECTION ── */
-.knots-section {
-  background: var(--navy);
-  padding: 5vw 0;
-  margin-top: 4vw;
-}
-.knots-section__inner {
-  max-width: 780px;
-  margin: 0 auto;
-  padding: 0 5vw;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
-}
-.knots-section__label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-}
-.knots-section__headline {
-  font-family: var(--serif);
-  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-  color: var(--white);
-  line-height: 1.15;
-  margin-bottom: 1rem;
-}
-.knots-section__body {
-  font-size: 0.95rem;
-  color: rgba(255,255,255,0.65);
-  line-height: 1.7;
-  margin-bottom: 1rem;
-}
-.knots-section__body:last-child { margin-bottom: 0; }
-.knots-knot {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.knots-card {
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 6px;
-  padding: 1rem 1.25rem;
-}
-.knots-card__label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 4px;
-}
-.knots-card__text {
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.65);
-  line-height: 1.55;
-}
-
-/* ── C CHAPTER INTRO ── */
-.chapter-intro {
-  min-height: 65vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 8vw 5vw;
-  position: relative;
-  overflow: hidden;
-}
-.chapter-intro .bg-letter {
-  position: absolute;
-  right: -2vw; bottom: -8vw;
-  font-family: var(--serif);
-  font-size: 55vw;
-  font-weight: 700;
-  line-height: 1;
-  opacity: 0.06;
-  pointer-events: none;
-  user-select: none;
-  color: var(--white);
-}
-.chapter-intro__num {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  opacity: 0.45;
-  margin-bottom: 1rem;
-  color: var(--white);
-}
-.chapter-intro__name {
-  font-family: var(--serif);
-  font-size: clamp(3.5rem, 12vw, 9rem);
-  color: var(--white);
-  line-height: 0.9;
-  margin-bottom: 1.5rem;
-}
-.chapter-intro__def {
-  font-size: clamp(1.1rem, 2.5vw, 1.45rem);
-  color: rgba(255,255,255,0.75);
-  max-width: 34ch;
-  line-height: 1.55;
-}
-
-/* ── SCROLL SECTION ── */
-.scroll-section {
-  display: grid;
-  grid-template-columns: var(--panel-w) var(--text-w);
-  min-height: 100vh;
-  background: var(--white);
-}
-.scroll-section__visual {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden;
-  background: var(--navy);
-}
-.scroll-section__text { padding: 0; }
-
-/* ── VISUAL PANEL ── */
-.visual-scene {
-  position: absolute;
-  inset: 0;
-  padding: 3rem 2.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-.visual-scene.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-.vs__num {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
-  margin-bottom: 1rem;
-}
-.vs__name {
-  font-family: var(--serif);
-  font-size: clamp(2.8rem, 5vw, 4.5rem);
-  color: var(--white);
-  line-height: 0.95;
-  margin-bottom: 1.5rem;
-}
-.vs__def {
-  font-size: 1rem;
-  color: rgba(255,255,255,0.6);
-  line-height: 1.65;
-  max-width: 26ch;
-  margin-bottom: 2.5rem;
-}
-.vs__dir {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.vs__dir-item {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-.vs__dir-label {
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
-}
-.vs__dir-text {
-  font-size: 11px;
-  color: rgba(255,255,255,0.55);
-  line-height: 1.5;
-}
-
-/* ── STEP BLOCKS ── */
-.step {
-  min-height: var(--step-h);
-  padding: 5rem 3.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-bottom: 1px solid var(--lgray);
-}
-.step--looks { min-height: var(--step-looks); justify-content: flex-start; padding-top: 5rem; }
-.step:last-child { border-bottom: none; }
-.step__section-label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--lgray);
-  color: var(--mgray);
-}
-.step__section-label.yes {
-  color: #7A5210;
-  border-color: var(--yes-bd);
-}
-.step__section-label.no {
-  color: var(--no-bd);
-  border-color: var(--no-bd);
-}
-.step__headline {
-  font-family: var(--serif);
-  font-size: clamp(1.5rem, 3vw, 2.1rem);
-  color: var(--navy);
-  line-height: 1.2;
-  margin-bottom: 1rem;
-}
-.step__body {
-  font-size: 1.05rem;
-  color: var(--dgray);
-  line-height: 1.75;
-  margin-bottom: 1.2rem;
-}
-.step__body:last-of-type { margin-bottom: 1.5rem; }
-
-/* Sub-labels inside steps */
-.step__sub-label {
-  font-size: 8.5px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--mgray);
-  margin-top: 1.25rem;
-  margin-bottom: 0.5rem;
-}
-
-/* Example cards */
-.example-card {
-  padding: 1rem 1.25rem;
-  border-radius: 4px;
-  margin-bottom: 0.65rem;
-  font-size: 0.95rem;
-  line-height: 1.65;
-}
-.example-card.yes {
-  background: var(--yes-bg);
-  border: 1px solid rgba(203,136,38,0.22);
-  border-left: 5px solid var(--yes-bd);
-  color: var(--yes-tx);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-.example-card.no {
-  background: var(--no-bg);
-  border: 1px solid rgba(139,26,46,0.15);
-  border-left: 5px solid var(--no-bd);
-  color: var(--no-tx);
-}
-.example-card .prefix {
-  font-weight: 700;
-  margin-right: 4px;
-}
-.example-card.yes .prefix { color: var(--yes-bd); }
-.example-card.no  .prefix { color: var(--no-bd); }
-
-/* Manager note */
-.manager-note {
-  margin-top: 2rem;
-  padding: 1.25rem 1.5rem;
-  background: var(--navy);
-  border-radius: 6px;
-}
-.manager-note__label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0.6rem;
-}
-.manager-note__text {
-  font-size: 0.95rem;
-  color: rgba(255,255,255,0.72);
-  line-height: 1.65;
-}
-.manager-note__action {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255,255,255,0.12);
-  font-size: 0.9rem;
-  color: var(--gold);
-  line-height: 1.6;
-}
-
-/* ── CLOSING ── */
-.closing {
-  background: var(--navy);
-  padding: 10vw 6vw;
-  position: relative;
-  overflow: hidden;
-}
-.closing::before {
-  content: "C";
-  position: absolute;
-  right: -4vw; top: -6vw;
-  font-family: var(--serif);
-  font-size: 50vw;
-  color: rgba(255,255,255,0.025);
-  line-height: 1;
-  pointer-events: none;
-}
-.closing__label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-}
-.closing__headline {
-  font-family: var(--serif);
-  font-size: clamp(2rem, 5vw, 4rem);
-  color: var(--white);
-  max-width: 24ch;
-  line-height: 1.15;
-  margin-bottom: 2rem;
-}
-.closing__body {
-  font-size: 1.05rem;
-  color: rgba(255,255,255,0.6);
-  max-width: 50ch;
-  line-height: 1.75;
-  margin-bottom: 1.2rem;
-}
-.closing__grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-  margin-top: 3.5rem;
-}
-.closing__c {
-  padding: 1.25rem 1rem;
-  border-radius: 6px;
-  text-align: center;
-}
-.closing__c-name {
-  font-family: var(--serif);
-  font-size: 1.2rem;
-  color: var(--white);
-  margin-bottom: 4px;
-}
-.closing__c-val {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
-}
-
-/* ── FOOTER ── */
-.site-footer {
-  background: #000B28;
-  padding: 2rem 5vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-.site-footer p {
-  font-size: 10px;
-  color: rgba(255,255,255,0.22);
-  letter-spacing: 0.5px;
-}
-.site-footer__mark {
-  font-family: var(--serif);
-  font-size: 16px;
-  color: rgba(255,255,255,0.18);
-}
-
-/* ── MOBILE ── */
-@media (max-width: 767px) {
-  .scroll-section { display: flex; flex-direction: column; }
-  .scroll-section__visual {
-    order: -1;
-    position: sticky; top: 0;
-    height: 48vh; min-height: 260px; max-height: 380px;
-    width: 100%; z-index: 10;
-  }
-  .visual-scene { padding: 1.75rem 1.5rem; }
-  .vs__name { font-size: 2.6rem; }
-  .vs__def { font-size: 0.9rem; max-width: none; }
-  .vs__dir { display: none; }
-  .step { padding: 2.5rem 1.5rem; min-height: 75vh; }
-  .step__body { font-size: 0.95rem; }
-  .closing__grid { grid-template-columns: 1fr 1fr; }
-  .hero { padding: 8vw 5vw 14vw; }
-  .setup__inner { padding: 0 5vw; }
-  .chapter-intro { padding: 8vw 5vw; min-height: 50vh; }
-  .knots-section__inner { grid-template-columns: 1fr; }
-  .how-to-read__grid { grid-template-columns: 1fr; }
-}
-
+  --navy:#001E60;--red:#EC1D27;--gold:#CB8826;--burg:#8B1A2E;--teal:#1B4D8E;--white:#FFFFFF;--off:#F5F4F0;--lgray:#E8E7E3;--mgray:#9A9890;--dgray:#2D2D2B;--yes-bg:#FFFFFF;--yes-bd:#CB8826;--yes-tx:#2D2D2B;--no-bg:#F5F4F0;--no-bd:#8B1A2E;--no-tx:#2D2D2B;--c-care:#EC1D27;--c-coord:#001E60;--c-clar:#CB8826;--c-comm:#8B1A2E;--c-ci:#1B4D8E;--panel-w:42%;--text-w:58%;--step-h:95vh;--step-looks:130vh;--serif:'DM Serif Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--off);color:var(--dgray);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+#progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:var(--red);z-index:100;transition:width 0.1s linear}
+.hero{min-height:100vh;background:var(--navy);display:flex;flex-direction:column;justify-content:center;padding:8vw 6vw 10vw;position:relative;overflow:hidden}.hero::before{content:"5";position:absolute;right:-2vw;top:-4vw;font-family:var(--serif);font-size:55vw;color:rgba(255,255,255,0.03);line-height:1;pointer-events:none;user-select:none}.hero__label{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem}.hero__title{font-family:var(--serif);font-size:clamp(3rem,9vw,8rem);color:var(--white);line-height:0.95;max-width:14ch;margin-bottom:2rem}.hero__sub{font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,0.6);max-width:38ch;line-height:1.7;margin-bottom:3rem}.hero__pills{display:flex;flex-wrap:wrap;gap:10px}.hero__pill{padding:6px 16px;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.55);font-size:12px;font-weight:600;letter-spacing:0.5px;border-radius:100px}.hero__scroll{position:absolute;bottom:2.5rem;left:6vw;font-size:11px;font-weight:600;letter-spacing:2px;color:rgba(255,255,255,0.25);text-transform:uppercase;display:flex;align-items:center;gap:10px}.hero__scroll::before{content:'';display:block;width:24px;height:1px;background:rgba(255,255,255,0.25)}
+.setup{background:var(--white);padding:7vw 0 0}.setup__inner{max-width:780px;margin:0 auto;padding:0 5vw}.setup__label{font-size:10px;font-weight:700;letter-spacing:3px;color:var(--mgray);text-transform:uppercase;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--lgray)}.setup__headline{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.8rem);color:var(--navy);line-height:1.15;margin-bottom:1.5rem}.setup__body{font-size:1.05rem;color:var(--dgray);line-height:1.75;margin-bottom:1.2rem}.setup__note{font-size:0.9rem;color:var(--mgray);border-left:3px solid var(--lgray);padding-left:1rem;font-style:italic;line-height:1.65;margin-bottom:3rem}
+.values-table{width:100%;border-collapse:collapse;margin:2.5rem 0}.values-table th{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mgray);padding:0.6rem 1rem;text-align:left;border-bottom:2px solid var(--lgray)}.values-table td{padding:0.75rem 1rem;font-size:0.95rem;border-bottom:1px solid var(--lgray);line-height:1.4}.values-table tr:last-child td{border-bottom:none}.values-table .habit-name{font-weight:700;color:var(--navy)}.values-table .habit-color{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:middle}.values-table .value-name{color:var(--mgray);font-size:0.9rem}
+.how-to-read{background:var(--off);border-radius:8px;padding:1.5rem 1.75rem;margin:2rem 0 3rem}.how-to-read__label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mgray);margin-bottom:0.8rem}.how-to-read__grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}.how-to-read__item{font-size:0.9rem;color:var(--dgray);line-height:1.5;display:flex;align-items:flex-start;gap:8px}.how-to-read__item::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px}
+.knots-section{background:var(--navy);padding:5vw 0;margin-top:4vw}.knots-section__inner{max-width:780px;margin:0 auto;padding:0 5vw;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}.knots-section__label{font-size:10px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:1rem}.knots-section__headline{font-family:var(--serif);font-size:clamp(1.6rem,3.5vw,2.4rem);color:var(--white);line-height:1.15;margin-bottom:1rem}.knots-section__body{font-size:0.95rem;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:1rem}.knots-section__body:last-child{margin-bottom:0}.knots-knot{display:flex;flex-direction:column;gap:0.75rem}.knots-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:1rem 1.25rem}.knots-card__label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}.knots-card__text{font-size:0.9rem;color:rgba(255,255,255,0.65);line-height:1.55}
+.chapter-intro{min-height:65vh;display:flex;flex-direction:column;justify-content:center;padding:8vw 5vw;position:relative;overflow:hidden}.chapter-intro .bg-letter{position:absolute;right:-2vw;bottom:-8vw;font-family:var(--serif);font-size:55vw;font-weight:700;line-height:1;opacity:0.06;pointer-events:none;user-select:none;color:var(--white)}.chapter-intro__num{font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;opacity:0.45;margin-bottom:1rem;color:var(--white)}.chapter-intro__name{font-family:var(--serif);font-size:clamp(3.5rem,12vw,9rem);color:var(--white);line-height:0.9;margin-bottom:1.5rem}.chapter-intro__def{font-size:clamp(1.1rem,2.5vw,1.45rem);color:rgba(255,255,255,0.75);max-width:34ch;line-height:1.55}
+.scroll-section{display:grid;grid-template-columns:var(--panel-w) var(--text-w);min-height:100vh;background:var(--white)}.scroll-section__visual{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--navy)}.scroll-section__text{padding:0}
+.visual-scene{position:absolute;inset:0;padding:3rem 2.5rem;display:flex;flex-direction:column;justify-content:center;opacity:0;transition:opacity 0.4s ease;pointer-events:none}.visual-scene.active{opacity:1;pointer-events:auto}.vs__num{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1rem}.vs__name{font-family:var(--serif);font-size:clamp(2.8rem,5vw,4.5rem);color:var(--white);line-height:0.95;margin-bottom:1.5rem}.vs__def{font-size:1rem;color:rgba(255,255,255,0.6);line-height:1.65;max-width:26ch;margin-bottom:2.5rem}.vs__dir{display:flex;flex-direction:column;gap:0.75rem}.vs__dir-item{display:flex;flex-direction:column;gap:3px}.vs__dir-label{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3)}.vs__dir-text{font-size:11px;color:rgba(255,255,255,0.55);line-height:1.5}
+.step{min-height:var(--step-h);padding:5rem 3.5rem;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--lgray)}.step--looks{min-height:var(--step-looks);justify-content:flex-start;padding-top:5rem}.step:last-child{border-bottom:none}.step__section-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--lgray);color:var(--mgray)}.step__section-label.yes{color:#7A5210;border-color:var(--yes-bd)}.step__section-label.no{color:var(--no-bd);border-color:var(--no-bd)}.step__headline{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.1rem);color:var(--navy);line-height:1.2;margin-bottom:1rem}.step__body{font-size:1.05rem;color:var(--dgray);line-height:1.75;margin-bottom:1.2rem}.step__body:last-of-type{margin-bottom:1.5rem}.step__sub-label{font-size:8.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mgray);margin-top:1.25rem;margin-bottom:0.5rem}
+.example-card{padding:1rem 1.25rem;border-radius:4px;margin-bottom:0.65rem;font-size:0.95rem;line-height:1.65}.example-card.yes{background:var(--yes-bg);border:1px solid rgba(203,136,38,0.22);border-left:5px solid var(--yes-bd);color:var(--yes-tx);box-shadow:0 1px 3px rgba(0,0,0,0.05)}.example-card.no{background:var(--no-bg);border:1px solid rgba(139,26,46,0.15);border-left:5px solid var(--no-bd);color:var(--no-tx)}.example-card .prefix{font-weight:700;margin-right:4px}.example-card.yes .prefix{color:var(--yes-bd)}.example-card.no .prefix{color:var(--no-bd)}
+.manager-note{margin-top:2rem;padding:1.25rem 1.5rem;background:var(--navy);border-radius:6px}.manager-note__label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem}.manager-note__text{font-size:0.95rem;color:rgba(255,255,255,0.72);line-height:1.65}.manager-note__action{margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.12);font-size:0.9rem;color:var(--gold);line-height:1.6}
+.closing{background:var(--navy);padding:10vw 6vw;position:relative;overflow:hidden}.closing::before{content:"C";position:absolute;right:-4vw;top:-6vw;font-family:var(--serif);font-size:50vw;color:rgba(255,255,255,0.025);line-height:1;pointer-events:none}.closing__label{font-size:10px;font-weight:700;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:2rem}.closing__headline{font-family:var(--serif);font-size:clamp(2rem,5vw,4rem);color:var(--white);max-width:24ch;line-height:1.15;margin-bottom:2rem}.closing__body{font-size:1.05rem;color:rgba(255,255,255,0.6);max-width:50ch;line-height:1.75;margin-bottom:1.2rem}.closing__grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:3.5rem}.closing__c{padding:1.25rem 1rem;border-radius:6px;text-align:center}.closing__c-name{font-family:var(--serif);font-size:1.2rem;color:var(--white);margin-bottom:4px}.closing__c-val{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.4)}
+.site-footer{background:#000B28;padding:2rem 5vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}.site-footer p{font-size:10px;color:rgba(255,255,255,0.22);letter-spacing:0.5px}.site-footer__mark{font-family:var(--serif);font-size:16px;color:rgba(255,255,255,0.18)}
+@media(max-width:767px){.scroll-section{display:flex;flex-direction:column}.scroll-section__visual{order:-1;position:sticky;top:0;height:48vh;min-height:260px;max-height:380px;width:100%;z-index:10}.visual-scene{padding:1.75rem 1.5rem}.vs__name{font-size:2.6rem}.vs__def{font-size:0.9rem;max-width:none}.vs__dir{display:none}.step{padding:2.5rem 1.5rem;min-height:75vh}.step__body{font-size:0.95rem}.closing__grid{grid-template-columns:1fr 1fr}.hero{padding:8vw 5vw 14vw}.setup__inner{padding:0 5vw}.chapter-intro{padding:8vw 5vw;min-height:50vh}.knots-section__inner{grid-template-columns:1fr}.how-to-read__grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
 <div id="progress-bar"></div>
 
-<!-- ═══════ HERO ════════════════════════════════════════ -->
 <section class="hero">
-  <div class="hero__label">ONE CASL</div>
+  <div class="hero__label">ONE CASL: A Shared Way of Working</div>
   <h1 class="hero__title">The 5 Habits of ONE CASL.</h1>
   <p class="hero__sub">This is how we work at CASL. How we treat our clients. How we treat each other. How we take care of ourselves.</p>
   <div class="hero__pills">
@@ -684,71 +47,27 @@ body {
   <div class="hero__scroll">Scroll to begin</div>
 </section>
 
-<!-- ═══════ SETUP ═════════════════════════════════════════ -->
 <section class="setup">
   <div class="setup__inner">
-
     <div class="setup__label">What is ONE CASL</div>
-
     <h2 class="setup__headline">CASL has one mission. We need one way of working.</h2>
-
-    <p class="setup__body">
-      CASL has served Asian Americans and immigrants in Chicago for more than 40 years. Our mission is to catalyze the transformation of individuals, families, and the community for an equitable future, building on the wisdom of generations. Our vision is of individuals, families, and communities who thrive in a diverse and inclusive world.
-    </p>
-    <p class="setup__body">
-      Today we work across four paths: Human Services, Education, Health, and Impact and Advocacy. We help more than 7,400 people each year. More than half of them use more than one CASL program. They deserve to feel like they are in one organization, not four separate ones. Whether they are talking to the first person at intake or the fifth person they have seen this month, the experience should feel the same: clear, kind, and followed through.
-    </p>
-    <p class="setup__body">
-      ONE CASL is our answer. It means one team, one way of working, across all four paths. It starts with five habits.
-    </p>
-
-    <p class="setup__note">
-      Naming what works is how we make sure everyone does it, not just some of us.
-    </p>
-
-    <div class="setup__label" style="margin-top: 2.5rem;">Our values and our habits</div>
-    <p class="setup__body">
-      CASL has five values: Inclusivity, Empowerment, Collaboration, Transformation, and Resiliency. The 5 habits are how those values show up in your work every day. Each habit is connected to one value.
-    </p>
-
+    <p class="setup__body">CASL has served Asian Americans and immigrants in Chicago for more than 40 years. Our mission is to catalyze the transformation of individuals, families, and the community for an equitable future, building on the wisdom of generations. Our vision is of individuals, families, and communities who thrive in a diverse and inclusive world.</p>
+    <p class="setup__body">Today we work across four paths: Human Services, Education, Health, and Impact and Advocacy. We help more than 7,400 people each year. More than half of them use more than one CASL program. They deserve to feel like they are in one organization, not four separate ones. Whether they are talking to the first person at intake or the fifth person they have seen this month, the experience should feel the same: clear, kind, and followed through.</p>
+    <p class="setup__body">ONE CASL is our answer. It means one team, one way of working, across all four paths. It starts with five habits.</p>
+    <p class="setup__note">Naming what works is how we make sure everyone does it, not just some of us.</p>
+    <div class="setup__label" style="margin-top:2.5rem;">Our values and our habits</div>
+    <p class="setup__body">CASL has five values: Inclusivity, Empowerment, Collaboration, Transformation, and Resiliency. The 5 habits are how those values show up in your work every day. Each habit is connected to one value.</p>
     <table class="values-table">
-      <thead>
-        <tr>
-          <th>The Habit</th>
-          <th>What it means</th>
-          <th>The Value it comes from</th>
-        </tr>
-      </thead>
+      <thead><tr><th>The Habit</th><th>What it means</th><th>The Value it comes from</th></tr></thead>
       <tbody>
-        <tr>
-          <td><span class="habit-color" style="background:var(--c-care)"></span><span class="habit-name">Care</span></td>
-          <td>Be kind to every person you meet here, including yourself</td>
-          <td class="value-name">Inclusivity</td>
-        </tr>
-        <tr>
-          <td><span class="habit-color" style="background:var(--c-coord)"></span><span class="habit-name">Coordination</span></td>
-          <td>Share what you know so no one has to start over</td>
-          <td class="value-name">Collaboration</td>
-        </tr>
-        <tr>
-          <td><span class="habit-color" style="background:var(--c-clar)"></span><span class="habit-name">Clarity</span></td>
-          <td>Always tell people what comes next</td>
-          <td class="value-name">Empowerment</td>
-        </tr>
-        <tr>
-          <td><span class="habit-color" style="background:var(--c-comm)"></span><span class="habit-name">Commitment</span></td>
-          <td>Do what you said you would do</td>
-          <td class="value-name">Resiliency</td>
-        </tr>
-        <tr>
-          <td><span class="habit-color" style="background:var(--c-ci)"></span><span class="habit-name">Continuous Improvement</span></td>
-          <td>Learn from what happened so next time is better</td>
-          <td class="value-name">Transformation</td>
-        </tr>
+        <tr><td><span class="habit-color" style="background:var(--c-care)"></span><span class="habit-name">Care</span></td><td>Be kind to every person you meet here, including yourself</td><td class="value-name">Inclusivity</td></tr>
+        <tr><td><span class="habit-color" style="background:var(--c-coord)"></span><span class="habit-name">Coordination</span></td><td>Share what you know so no one has to start over</td><td class="value-name">Collaboration</td></tr>
+        <tr><td><span class="habit-color" style="background:var(--c-clar)"></span><span class="habit-name">Clarity</span></td><td>Always tell people what comes next</td><td class="value-name">Empowerment</td></tr>
+        <tr><td><span class="habit-color" style="background:var(--c-comm)"></span><span class="habit-name">Commitment</span></td><td>Do what you said you would do</td><td class="value-name">Resiliency</td></tr>
+        <tr><td><span class="habit-color" style="background:var(--c-ci)"></span><span class="habit-name">Continuous Improvement</span></td><td>Learn from what happened so next time is better</td><td class="value-name">Transformation</td></tr>
       </tbody>
     </table>
-
-    <div class="setup__label" style="margin-top: 2rem;">How to read this guide</div>
+    <div class="setup__label" style="margin-top:2rem;">How to read this guide</div>
     <div class="how-to-read">
       <div class="how-to-read__label">Each habit has four parts</div>
       <div class="how-to-read__grid">
@@ -758,546 +77,116 @@ body {
         <div class="how-to-read__item">A note for managers on how to lead it</div>
       </div>
     </div>
-
-    <p class="setup__body">
-      Each habit also shows three directions: what it means for your clients, for your colleagues, and for yourself. The habits work in all three directions.
-    </p>
-    <p class="setup__body">
-      These are habits. A rule tells you what to do once. A habit is something you practice until it becomes part of how you work. These five habits take time. Some days you will do them well. Some days you will not. What matters is that you keep trying.
-    </p>
-
+    <p class="setup__body">Each habit also shows three directions: what it means for your clients, for your colleagues, and for yourself. The habits work in all three directions.</p>
+    <p class="setup__body">These are habits. A rule tells you what to do once. A habit is something you practice until it becomes part of how you work. These five habits take time. Some days you will do them well. Some days you will not. What matters is that you keep trying.</p>
   </div>
 </section>
 
-<!-- ═══════ C 1 — CARE ════════════════════════════════════ -->
-<section class="chapter-intro" style="background: var(--c-care);">
-  <div class="bg-letter">C</div>
-  <div class="chapter-intro__num">Habit 01 of 05</div>
-  <h2 class="chapter-intro__name">Care.</h2>
-  <p class="chapter-intro__def">Be kind to every person you meet here, including yourself. Make them feel like they belong.</p>
-</section>
+<section class="chapter-intro" style="background:var(--c-care);"><div class="bg-letter">C</div><div class="chapter-intro__num">Habit 01 of 05</div><h2 class="chapter-intro__name">Care.</h2><p class="chapter-intro__def">Be kind to every person you meet here, including yourself. Make them feel like they belong.</p></section>
 
 <div class="scroll-section" id="section-care">
   <div class="scroll-section__visual">
-
-    <div class="visual-scene active" data-scene-id="care-a">
-      <div class="vs__num">Habit 01 &nbsp;·&nbsp; CARE</div>
-      <div class="vs__name" style="color:#fff;">Care.</div>
-      <div class="vs__def">Be kind to every person you meet here, including yourself.</div>
-      <div class="vs__dir">
-        <div class="vs__dir-item">
-          <span class="vs__dir-label">For clients</span>
-          <span class="vs__dir-text">A warm welcome. Their name. A check-in if they have to wait.</span>
-        </div>
-        <div class="vs__dir-item">
-          <span class="vs__dir-label">For colleagues</span>
-          <span class="vs__dir-text">Kindness. No blame. Space to make mistakes.</span>
-        </div>
-        <div class="vs__dir-item">
-          <span class="vs__dir-label">For yourself</span>
-          <span class="vs__dir-text">Take breaks. Ask for help. You cannot give others what you do not have.</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="visual-scene" data-scene-id="care-b" style="background: var(--c-care);">
-      <div class="vs__num">Habit 01 &nbsp;·&nbsp; CARE</div>
-      <div class="vs__name">What it looks like.</div>
-      <div class="vs__def">Small things. Real actions. You can start today.</div>
-    </div>
-
-    <div class="visual-scene" data-scene-id="care-c">
-      <div class="vs__num">Habit 01 &nbsp;·&nbsp; CARE</div>
-      <div class="vs__name">What it does not look like.</div>
-      <div class="vs__def">These things happen today. We are naming them so we can change them.</div>
-    </div>
-
+    <div class="visual-scene active" data-scene-id="care-a"><div class="vs__num">Habit 01 &nbsp;·&nbsp; CARE</div><div class="vs__name" style="color:#fff;">Care.</div><div class="vs__def">Be kind to every person you meet here, including yourself.</div><div class="vs__dir"><div class="vs__dir-item"><span class="vs__dir-label">For clients</span><span class="vs__dir-text">A warm welcome. Their name. A check-in if they have to wait.</span></div><div class="vs__dir-item"><span class="vs__dir-label">For colleagues</span><span class="vs__dir-text">Kindness. No blame. Space to make mistakes.</span></div><div class="vs__dir-item"><span class="vs__dir-label">For yourself</span><span class="vs__dir-text">Take breaks. Ask for help. You cannot give others what you do not have.</span></div></div></div>
+    <div class="visual-scene" data-scene-id="care-b" style="background:var(--c-care);"><div class="vs__num">Habit 01 &nbsp;·&nbsp; CARE</div><div class="vs__name">What it looks like.</div><div class="vs__def">Small things. Real actions. You can start today.</div></div>
+    <div class="visual-scene" data-scene-id="care-c"><div class="vs__num">Habit 01 &nbsp;·&nbsp; CARE</div><div class="vs__name">What it does not look like.</div><div class="vs__def">These things happen today. We are naming them so we can change them.</div></div>
   </div>
-
   <div class="scroll-section__text">
-
-    <div class="step" data-scene="care-a">
-      <div class="step__section-label" style="color:var(--c-care); border-color: #F5B7B7;">HABIT 01 &nbsp;·&nbsp; CARE</div>
-      <h3 class="step__headline">Care is what a person feels the moment they arrive.</h3>
-      <p class="step__body">
-        Many of our clients have had difficult experiences before they walk in. They may have gone to another agency and been turned away. They may not speak English well. They may feel nervous or unsure.
-      </p>
-      <p class="step__body">
-        The first thing they notice is how they are treated. Care happens in the moments before any program begins, before any form is signed, before any question is asked.
-      </p>
-      <p class="step__body">
-        Care also means how we treat each other as colleagues. And how we treat ourselves. You cannot give others what you do not have.
-      </p>
-    </div>
-
-    <div class="step step--looks" data-scene="care-b">
-      <div class="step__section-label yes">LOOKS LIKE</div>
-      <h3 class="step__headline">Small things that make a real difference.</h3>
-      <p class="step__body">These are real actions. You can start any of them today.</p>
-
-      <div class="step__sub-label">In the space</div>
-      <div class="example-card yes"><span class="prefix">+</span>The room itself shows Care. Clean space. Somewhere to sit. Information posted in the languages your clients speak. The room says "you are welcome here" before anyone speaks.</div>
-
-      <div class="step__sub-label">With clients</div>
-      <div class="example-card yes"><span class="prefix">+</span>You say hello when someone walks in. You say their name if you know it. You tell them what will happen next. "Welcome to CASL. My name is ___. Here is what we will do today."</div>
-      <div class="example-card yes"><span class="prefix">+</span>Someone has been waiting 15 minutes. You walk over. You say their name. You let them know you have not forgotten them. You tell them how much longer the wait will be.</div>
-      <div class="example-card yes"><span class="prefix">+</span>You offer water. You sit down with them, not above them. You speak at a pace they can follow.</div>
-
-      <div class="step__sub-label">With colleagues</div>
-      <div class="example-card yes"><span class="prefix">+</span>A coworker has had a difficult day. You notice. You say something kind. You do not add to what they are already carrying.</div>
-
-      <div class="step__sub-label">For yourself</div>
-      <div class="example-card yes"><span class="prefix">+</span>Before a difficult meeting, you take a moment. You breathe. You arrive present, not rushed.</div>
-      <div class="example-card yes"><span class="prefix">+</span>When you are struggling, you say so. You ask for support. Asking for help is part of the job, not a sign of failure.</div>
-
-      <div class="manager-note">
-        <div class="manager-note__label">For managers</div>
-        <div class="manager-note__text">You notice when someone on your team is struggling, before they decide to leave. You run a brief check-in after difficult cases. You give your team what you want them to give their clients. The habit of Care starts with you.</div>
-        <div class="manager-note__action">Your action: After a difficult case or a busy hour, check in with your team before they move to the next thing. Ask: what do you need right now?</div>
-      </div>
-    </div>
-
-    <div class="step" data-scene="care-c">
-      <div class="step__section-label no">DOES NOT LOOK LIKE</div>
-      <h3 class="step__headline">These things happen. We are naming them so we can change them.</h3>
-      <div class="example-card no"><span class="prefix">x</span>A person sits in the lobby for 30 minutes without any staff speaking to them or telling them how long the wait will be. A form is handed over with no explanation. A staff member absorbs a very difficult story and then goes directly to the next meeting with no break.</div>
-    </div>
-
+    <div class="step" data-scene="care-a"><div class="step__section-label" style="color:var(--c-care);border-color:#F5B7B7;">HABIT 01 &nbsp;·&nbsp; CARE</div><h3 class="step__headline">Care is what a person feels the moment they arrive.</h3><p class="step__body">Many of our clients have had difficult experiences before they walk in. They may have gone to another agency and been turned away. They may not speak English well. They may feel nervous or unsure.</p><p class="step__body">The first thing they notice is how they are treated. Care happens in the moments before any program begins, before any form is signed, before any question is asked.</p><p class="step__body">Care also means how we treat each other as colleagues. And how we treat ourselves. You cannot give others what you do not have.</p></div>
+    <div class="step step--looks" data-scene="care-b"><div class="step__section-label yes">LOOKS LIKE</div><h3 class="step__headline">Small things that make a real difference.</h3><p class="step__body">These are real actions. You can start any of them today.</p><div class="step__sub-label">In the space</div><div class="example-card yes"><span class="prefix">+</span>The room itself shows Care. Clean space. Somewhere to sit. Information posted in the languages your clients speak. The room says "you are welcome here" before anyone speaks.</div><div class="step__sub-label">With clients</div><div class="example-card yes"><span class="prefix">+</span>You say hello when someone walks in. You say their name if you know it. You tell them what will happen next. "Welcome to CASL. My name is ___. Here is what we will do today."</div><div class="example-card yes"><span class="prefix">+</span>Someone has been waiting 15 minutes. You walk over. You say their name. You let them know you have not forgotten them. You tell them how much longer the wait will be.</div><div class="example-card yes"><span class="prefix">+</span>You offer water. You sit down with them, not above them. You speak at a pace they can follow.</div><div class="step__sub-label">With colleagues</div><div class="example-card yes"><span class="prefix">+</span>A coworker has had a difficult day. You notice. You say something kind. You do not add to what they are already carrying.</div><div class="step__sub-label">For yourself</div><div class="example-card yes"><span class="prefix">+</span>Before a difficult meeting, you take a moment. You breathe. You arrive present, not rushed.</div><div class="example-card yes"><span class="prefix">+</span>When you are struggling, you say so. You ask for support. Asking for help is part of the job, not a sign of failure.</div><div class="manager-note"><div class="manager-note__label">For managers</div><div class="manager-note__text">You notice when someone on your team is struggling, before they decide to leave. You run a brief check-in after difficult cases. You give your team what you want them to give their clients. The habit of Care starts with you.</div><div class="manager-note__action">Your action: After a difficult case or a busy hour, check in with your team before they move to the next thing. Ask: what do you need right now?</div></div></div>
+    <div class="step" data-scene="care-c"><div class="step__section-label no">DOES NOT LOOK LIKE</div><h3 class="step__headline">These things happen. We are naming them so we can change them.</h3><div class="example-card no"><span class="prefix">x</span>A person sits in the lobby for 30 minutes without any staff speaking to them or telling them how long the wait will be. A form is handed over with no explanation. A staff member absorbs a very difficult story and then goes directly to the next meeting with no break.</div></div>
   </div>
 </div>
 
-
-<!-- ═══════ C 2 — COORDINATION ═══════════════════════════ -->
-<section class="chapter-intro" style="background: var(--c-coord);">
-  <div class="bg-letter">C</div>
-  <div class="chapter-intro__num">Habit 02 of 05</div>
-  <h2 class="chapter-intro__name">Coordination.</h2>
-  <p class="chapter-intro__def">Share what you know so no one has to start over.</p>
-</section>
+<section class="chapter-intro" style="background:var(--c-coord);"><div class="bg-letter">C</div><div class="chapter-intro__num">Habit 02 of 05</div><h2 class="chapter-intro__name">Coordination.</h2><p class="chapter-intro__def">Share what you know so no one has to start over.</p></section>
 
 <div class="scroll-section" id="section-coord">
   <div class="scroll-section__visual">
-
-    <div class="visual-scene active" data-scene-id="coord-a">
-      <div class="vs__num">Habit 02 &nbsp;·&nbsp; COORDINATION</div>
-      <div class="vs__name">Coordination.</div>
-      <div class="vs__def">Share what you know so no one has to start over.</div>
-      <div class="vs__dir">
-        <div class="vs__dir-item">
-          <span class="vs__dir-label">For clients</span>
-          <span class="vs__dir-text">You walk with them to the next person. You share what you already know about them.</span>
-        </div>
-        <div class="vs__dir-item">
-          <span class="vs__dir-label">For colleagues</span>
-          <span class="vs__dir-text">You tell the next person what to expect. You do not assume they already know.</span>
-        </div>
-        <div class="vs__dir-item">
-          <span class="vs__dir-label">For yourself</span>
-          <span class="vs__dir-text">You know what your job is. When you are not sure, you ask.</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="visual-scene" data-scene-id="coord-b" style="background: var(--c-coord);">
-      <div class="vs__num">Habit 02 &nbsp;·&nbsp; COORDINATION</div>
-      <div class="vs__name">What it looks like.</div>
-      <div class="vs__def">Always a next step. Always a person waiting for them.</div>
-    </div>
-
-    <div class="visual-scene" data-scene-id="coord-c">
-      <div class="vs__num">Habit 02 &nbsp;·&nbsp; COORDINATION</div>
-      <div class="vs__name">What it does not look like.</div>
-      <div class="vs__def">The client had to explain themselves again. That is a Coordination failure.</div>
-    </div>
-
+    <div class="visual-scene active" data-scene-id="coord-a"><div class="vs__num">Habit 02 &nbsp;·&nbsp; COORDINATION</div><div class="vs__name">Coordination.</div><div class="vs__def">Share what you know so no one has to start over.</div><div class="vs__dir"><div class="vs__dir-item"><span class="vs__dir-label">For clients</span><span class="vs__dir-text">You walk with them to the next person. You share what you already know about them.</span></div><div class="vs__dir-item"><span class="vs__dir-label">For colleagues</span><span class="vs__dir-text">You tell the next person what to expect. You do not assume they already know.</span></div><div class="vs__dir-item"><span class="vs__dir-label">For yourself</span><span class="vs__dir-text">You know what your job is. When you are not sure, you ask.</span></div></div></div>
+    <div class="visual-scene" data-scene-id="coord-b" style="background:var(--c-coord);"><div class="vs__num">Habit 02 &nbsp;·&nbsp; COORDINATION</div><div class="vs__name">What it looks like.</div><div class="vs__def">Always a next step. Always a person waiting for them.</div></div>
+    <div class="visual-scene" data-scene-id="coord-c"><div class="vs__num">Habit 02 &nbsp;·&nbsp; COORDINATION</div><div class="vs__name">What it does not look like.</div><div class="vs__def">The client had to explain themselves again. That is a Coordination failure.</div></div>
   </div>
-
   <div class="scroll-section__text">
-
-    <div class="step" data-scene="coord-a">
-      <div class="step__section-label" style="color:var(--c-coord); border-color:#B5C5E0;">HABIT 02 &nbsp;·&nbsp; COORDINATION</div>
-      <h3 class="step__headline">No one should have to tell their story twice.</h3>
-      <p class="step__body">
-        CASL has four paths. Each path has different staff, different programs, and different systems. For a client, moving from one path to another can feel like starting over every time, with a new face and the same questions again.
-      </p>
-      <p class="step__body">
-        Coordination is our answer to that. We share what we know about each client before we meet them. We walk with them to the next person. We make sure the next person is ready.
-      </p>
-      <p class="step__body">
-        When Coordination works, a client feels like CASL is one place, not four.
-      </p>
-    </div>
-
-    <div class="step step--looks" data-scene="coord-b">
-      <div class="step__section-label yes">LOOKS LIKE</div>
-      <h3 class="step__headline">You walk with them. You do not point.</h3>
-
-      <div class="step__sub-label">With clients</div>
-      <div class="example-card yes"><span class="prefix">+</span>You know what every CASL path does. You can explain any of them in one sentence. You know who to call. You do not need to look it up while a client is waiting.</div>
-      <div class="example-card yes"><span class="prefix">+</span>When a client is moving to the next staff member, you go first. You say: "I want to introduce you to [name]. She will help you from here. I have told her about you." Then you bring the client over.</div>
-      <div class="example-card yes"><span class="prefix">+</span>Before your first meeting with a client, you read their intake record. You already know their situation. You open the meeting: "I have looked at your file. I know you already went through intake. Let us continue from there."</div>
-
-      <div class="step__sub-label">With colleagues</div>
-      <div class="example-card yes"><span class="prefix">+</span>A client could benefit from another CASL program. You do not just tell them. You make the connection yourself. You create the referral in the system. You tell the next person they are coming.</div>
-
-      <div class="manager-note">
-        <div class="manager-note__label">For managers</div>
-        <div class="manager-note__text">Your job includes the space between teams. When a client needs to move from one team to another, you make sure it happens. You do not wait for someone else to notice the gap. Run a regular coordination meeting — not a status meeting, but one built around this question: who needs to know what about which client? When the problem is between departments, you raise it. That is also your job.</div>
-        <div class="manager-note__action">Your action: In your next team meeting, ask one question: who is a client we are all currently working with, and does everyone who needs to know, know?</div>
-      </div>
-    </div>
-
-    <div class="step" data-scene="coord-c">
-      <div class="step__section-label no">DOES NOT LOOK LIKE</div>
-      <h3 class="step__headline">When a client has to tell their story again, something went wrong.</h3>
-      <div class="example-card no"><span class="prefix">x</span>A client is given a room number and sent alone. They arrive and no one expected them. The same questions are asked that intake already answered.</div>
-      <div class="example-card no"><span class="prefix">x</span>A client could benefit from another program. It is mentioned in the meeting. No connection is made, no referral is logged. Nothing happens.</div>
-    </div>
-
+    <div class="step" data-scene="coord-a"><div class="step__section-label" style="color:var(--c-coord);border-color:#B5C5E0;">HABIT 02 &nbsp;·&nbsp; COORDINATION</div><h3 class="step__headline">No one should have to tell their story twice.</h3><p class="step__body">CASL has four paths. Each path has different staff, different programs, and different systems. For a client, moving from one path to another can feel like starting over every time, with a new face and the same questions again.</p><p class="step__body">Coordination is our answer to that. We share what we know about each client before we meet them. We walk with them to the next person. We make sure the next person is ready.</p><p class="step__body">When Coordination works, a client feels like CASL is one place, not four.</p></div>
+    <div class="step step--looks" data-scene="coord-b"><div class="step__section-label yes">LOOKS LIKE</div><h3 class="step__headline">You walk with them. You do not point.</h3><div class="step__sub-label">With clients</div><div class="example-card yes"><span class="prefix">+</span>You know what every CASL path does. You can explain any of them in one sentence. You know who to call. You do not need to look it up while a client is waiting.</div><div class="example-card yes"><span class="prefix">+</span>When a client is moving to the next staff member, you go first. You say: "I want to introduce you to [name]. She will help you from here. I have told her about you." Then you bring the client over.</div><div class="example-card yes"><span class="prefix">+</span>Before your first meeting with a client, you read their intake record. You already know their situation. You open the meeting: "I have looked at your file. I know you already went through intake. Let us continue from there."</div><div class="step__sub-label">With colleagues</div><div class="example-card yes"><span class="prefix">+</span>A client could benefit from another CASL program. You do not just tell them. You make the connection yourself. You create the referral in the system. You tell the next person they are coming.</div><div class="manager-note"><div class="manager-note__label">For managers</div><div class="manager-note__text">Your job includes the space between teams. When a client needs to move from one team to another, you make sure it happens. You do not wait for someone else to notice the gap. Run a regular coordination meeting — not a status meeting, but one built around this question: who needs to know what about which client? When the problem is between departments, you raise it. That is also your job.</div><div class="manager-note__action">Your action: In your next team meeting, ask one question: who is a client we are all currently working with, and does everyone who needs to know, know?</div></div></div>
+    <div class="step" data-scene="coord-c"><div class="step__section-label no">DOES NOT LOOK LIKE</div><h3 class="step__headline">When a client has to tell their story again, something went wrong.</h3><div class="example-card no"><span class="prefix">x</span>A client is given a room number and sent alone. They arrive and no one expected them. The same questions are asked that intake already answered.</div><div class="example-card no"><span class="prefix">x</span>A client could benefit from another program. It is mentioned in the meeting. No connection is made, no referral is logged. Nothing happens.</div></div>
   </div>
 </div>
 
-
-<!-- ═══════ C 3 — CLARITY ════════════════════════════════ -->
-<section class="chapter-intro" style="background: var(--c-clar);">
-  <div class="bg-letter">C</div>
-  <div class="chapter-intro__num">Habit 03 of 05</div>
-  <h2 class="chapter-intro__name">Clarity.</h2>
-  <p class="chapter-intro__def">Always tell people what comes next. Everyone who leaves CASL knows what happens after today.</p>
-</section>
+<section class="chapter-intro" style="background:var(--c-clar);"><div class="bg-letter">C</div><div class="chapter-intro__num">Habit 03 of 05</div><h2 class="chapter-intro__name">Clarity.</h2><p class="chapter-intro__def">Always tell people what comes next. Everyone who leaves CASL knows what happens after today.</p></section>
 
 <div class="scroll-section" id="section-clarity">
   <div class="scroll-section__visual">
-
-    <div class="visual-scene active" data-scene-id="clar-a">
-      <div class="vs__num">Habit 03 &nbsp;·&nbsp; CLARITY</div>
-      <div class="vs__name">Clarity.</div>
-      <div class="vs__def">Always tell people what comes next.</div>
-      <div class="vs__dir">
-        <div class="vs__dir-item">
-          <span class="vs__dir-label">For clients</span>
-          <span class="vs__dir-text">Plain words. The next step, always named. Check that they understood.</span>
-        </div>
-        <div class="vs__dir-item">
-          <span class="vs__dir-label">For colleagues</span>
-          <span class="vs__dir-text">Write it down. Name the next step. Do not assume.</span>
-        </div>
-        <div class="vs__dir-item">
-          <span class="vs__dir-label">For yourself</span>
-          <span class="vs__dir-text">Know what your job is. Know what it is not. Ask when you are not sure.</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="visual-scene" data-scene-id="clar-b" style="background: var(--c-clar);">
-      <div class="vs__num">Habit 03 &nbsp;·&nbsp; CLARITY</div>
-      <div class="vs__name">What it looks like.</div>
-      <div class="vs__def">Simple words. Said plainly. In the language they speak.</div>
-    </div>
-
-    <div class="visual-scene" data-scene-id="clar-c">
-      <div class="vs__num">Habit 03 &nbsp;·&nbsp; CLARITY</div>
-      <div class="vs__name">What it does not look like.</div>
-      <div class="vs__def">A person leaves without knowing what will happen next. That is a Clarity failure.</div>
-    </div>
-
+    <div class="visual-scene active" data-scene-id="clar-a"><div class="vs__num">Habit 03 &nbsp;·&nbsp; CLARITY</div><div class="vs__name">Clarity.</div><div class="vs__def">Always tell people what comes next.</div><div class="vs__dir"><div class="vs__dir-item"><span class="vs__dir-label">For clients</span><span class="vs__dir-text">Plain words. The next step, always named. Check that they understood.</span></div><div class="vs__dir-item"><span class="vs__dir-label">For colleagues</span><span class="vs__dir-text">Write it down. Name the next step. Do not assume.</span></div><div class="vs__dir-item"><span class="vs__dir-label">For yourself</span><span class="vs__dir-text">Know what your job is. Know what it is not. Ask when you are not sure.</span></div></div></div>
+    <div class="visual-scene" data-scene-id="clar-b" style="background:var(--c-clar);"><div class="vs__num">Habit 03 &nbsp;·&nbsp; CLARITY</div><div class="vs__name">What it looks like.</div><div class="vs__def">Simple words. Said plainly. In the language they speak.</div></div>
+    <div class="visual-scene" data-scene-id="clar-c"><div class="vs__num">Habit 03 &nbsp;·&nbsp; CLARITY</div><div class="vs__name">What it does not look like.</div><div class="vs__def">A person leaves without knowing what will happen next. That is a Clarity failure.</div></div>
   </div>
-
   <div class="scroll-section__text">
-
-    <div class="step" data-scene="clar-a">
-      <div class="step__section-label" style="color:var(--c-clar); border-color:#F5D9A0;">HABIT 03 &nbsp;·&nbsp; CLARITY</div>
-      <h3 class="step__headline">People can only take the next step if they know what it is.</h3>
-      <p class="step__body">
-        Many of the people who come to CASL have been passed from agency to agency. At each stop, no one explained what was happening or why they had to sign a form. No one told them the answer was no, or what they could do instead.
-      </p>
-      <p class="step__body">
-        We understand that. Clarity is our answer. When a person leaves CASL, they know exactly what will happen next.
-      </p>
-      <p class="step__body">
-        Clarity also means confirming that people understood you. Saying it plainly is the first step. Asking "does that make sense?" is the second.
-      </p>
-    </div>
-
-    <div class="step step--looks" data-scene="clar-b">
-      <div class="step__section-label yes">LOOKS LIKE</div>
-      <h3 class="step__headline">Say it plainly. Say it every time.</h3>
-      <div class="example-card yes"><span class="prefix">+</span>"This form is so you do not have to explain yourself every time you come to CASL. We keep your information so our team already knows your situation." Then you ask: "Do you have any questions about that?"</div>
-      <div class="example-card yes"><span class="prefix">+</span>"After today, someone from benefits will call you by Thursday. If you do not hear from us by then, here is the number to call." You write it down for them.</div>
-      <div class="example-card yes"><span class="prefix">+</span>"You do not qualify for this program today. But here are two things we can do right now to help." You name both things. You do not leave it there.</div>
-      <div class="example-card yes"><span class="prefix">+</span>At the end of every meeting: "Your next step is ___. My next step is ___. We will speak again on ___." Then you ask: "Is that clear? Do you have any questions?"</div>
-
-      <div class="manager-note">
-        <div class="manager-note__label">For managers</div>
-        <div class="manager-note__text">Your staff know what is expected of them because you said it clearly. If your team has to guess what is expected by watching each other, the expectation has not been communicated. Write it down. Say it out loud. Then check that they understood.</div>
-        <div class="manager-note__action">Your action: Pick one expectation your team should know. Write it down. Say it at your next check-in. Then ask: is that clear?</div>
-      </div>
-    </div>
-
-    <div class="step" data-scene="clar-c">
-      <div class="step__section-label no">DOES NOT LOOK LIKE</div>
-      <h3 class="step__headline">When a person leaves not knowing what comes next, we can do better.</h3>
-      <div class="example-card no"><span class="prefix">x</span>A form is given with "sign here" and no explanation. A person told they do not qualify leaves with no next step and no resource. They walk out with nothing to hold onto.</div>
-    </div>
-
+    <div class="step" data-scene="clar-a"><div class="step__section-label" style="color:var(--c-clar);border-color:#F5D9A0;">HABIT 03 &nbsp;·&nbsp; CLARITY</div><h3 class="step__headline">People can only take the next step if they know what it is.</h3><p class="step__body">Many of the people who come to CASL have been passed from agency to agency. At each stop, no one explained what was happening or why they had to sign a form. No one told them the answer was no, or what they could do instead.</p><p class="step__body">We understand that. Clarity is our answer. When a person leaves CASL, they know exactly what will happen next.</p><p class="step__body">Clarity also means confirming that people understood you. Saying it plainly is the first step. Asking "does that make sense?" is the second.</p></div>
+    <div class="step step--looks" data-scene="clar-b"><div class="step__section-label yes">LOOKS LIKE</div><h3 class="step__headline">Say it plainly. Say it every time.</h3><div class="example-card yes"><span class="prefix">+</span>"This form is so you do not have to explain yourself every time you come to CASL. We keep your information so our team already knows your situation." Then you ask: "Do you have any questions about that?"</div><div class="example-card yes"><span class="prefix">+</span>"After today, someone from benefits will call you by Thursday. If you do not hear from us by then, here is the number to call." You write it down for them.</div><div class="example-card yes"><span class="prefix">+</span>"You do not qualify for this program today. But here are two things we can do right now to help." You name both things. You do not leave it there.</div><div class="example-card yes"><span class="prefix">+</span>At the end of every meeting: "Your next step is ___. My next step is ___. We will speak again on ___." Then you ask: "Is that clear? Do you have any questions?"</div><div class="manager-note"><div class="manager-note__label">For managers</div><div class="manager-note__text">Your staff know what is expected of them because you said it clearly. If your team has to guess what is expected by watching each other, the expectation has not been communicated. Write it down. Say it out loud. Then check that they understood.</div><div class="manager-note__action">Your action: Pick one expectation your team should know. Write it down. Say it at your next check-in. Then ask: is that clear?</div></div></div>
+    <div class="step" data-scene="clar-c"><div class="step__section-label no">DOES NOT LOOK LIKE</div><h3 class="step__headline">When a person leaves not knowing what comes next, we can do better.</h3><div class="example-card no"><span class="prefix">x</span>A form is given with "sign here" and no explanation. A person told they do not qualify leaves with no next step and no resource. They walk out with nothing to hold onto.</div></div>
   </div>
 </div>
 
-
-<!-- ═══════ C 4 — COMMITMENT ═════════════════════════════ -->
-<section class="chapter-intro" style="background: var(--c-comm);">
-  <div class="bg-letter">C</div>
-  <div class="chapter-intro__num">Habit 04 of 05</div>
-  <h2 class="chapter-intro__name">Commitment.</h2>
-  <p class="chapter-intro__def">Do what you said you would do. Every time, not most of the time.</p>
-</section>
+<section class="chapter-intro" style="background:var(--c-comm);"><div class="bg-letter">C</div><div class="chapter-intro__num">Habit 04 of 05</div><h2 class="chapter-intro__name">Commitment.</h2><p class="chapter-intro__def">Do what you said you would do. Every time, not most of the time.</p></section>
 
 <div class="scroll-section" id="section-commit">
   <div class="scroll-section__visual">
-
-    <div class="visual-scene active" data-scene-id="comm-a">
-      <div class="vs__num">Habit 04 &nbsp;·&nbsp; COMMITMENT</div>
-      <div class="vs__name">Commitment.</div>
-      <div class="vs__def">Do what you said you would do. Every time, not most of the time.</div>
-      <div class="vs__dir">
-        <div class="vs__dir-item">
-          <span class="vs__dir-label">For clients</span>
-          <span class="vs__dir-text">A specific date. A written record. A real follow-up call.</span>
-        </div>
-        <div class="vs__dir-item">
-          <span class="vs__dir-label">For colleagues</span>
-          <span class="vs__dir-text">If you said it, it gets done. If you cannot do it, you say so first.</span>
-        </div>
-        <div class="vs__dir-item">
-          <span class="vs__dir-label">For yourself</span>
-          <span class="vs__dir-text">Only promise what you can actually do. Say less. Do more.</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="visual-scene" data-scene-id="comm-b" style="background: var(--c-comm);">
-      <div class="vs__num">Habit 04 &nbsp;·&nbsp; COMMITMENT</div>
-      <div class="vs__name">What it looks like.</div>
-      <div class="vs__def">You said it. You wrote it down. You did it.</div>
-    </div>
-
-    <div class="visual-scene" data-scene-id="comm-c">
-      <div class="vs__num">Habit 04 &nbsp;·&nbsp; COMMITMENT</div>
-      <div class="vs__name">What it does not look like.</div>
-      <div class="vs__def">A client who was not followed up will likely not come back. And they will not send anyone else.</div>
-    </div>
-
+    <div class="visual-scene active" data-scene-id="comm-a"><div class="vs__num">Habit 04 &nbsp;·&nbsp; COMMITMENT</div><div class="vs__name">Commitment.</div><div class="vs__def">Do what you said you would do. Every time, not most of the time.</div><div class="vs__dir"><div class="vs__dir-item"><span class="vs__dir-label">For clients</span><span class="vs__dir-text">A specific date. A written record. A real follow-up call.</span></div><div class="vs__dir-item"><span class="vs__dir-label">For colleagues</span><span class="vs__dir-text">If you said it, it gets done. If you cannot do it, you say so first.</span></div><div class="vs__dir-item"><span class="vs__dir-label">For yourself</span><span class="vs__dir-text">Only promise what you can actually do. Say less. Do more.</span></div></div></div>
+    <div class="visual-scene" data-scene-id="comm-b" style="background:var(--c-comm);"><div class="vs__num">Habit 04 &nbsp;·&nbsp; COMMITMENT</div><div class="vs__name">What it looks like.</div><div class="vs__def">You said it. You wrote it down. You did it.</div></div>
+    <div class="visual-scene" data-scene-id="comm-c"><div class="vs__num">Habit 04 &nbsp;·&nbsp; COMMITMENT</div><div class="vs__name">What it does not look like.</div><div class="vs__def">A client who was not followed up will likely not come back. And they will not send anyone else.</div></div>
   </div>
-
   <div class="scroll-section__text">
-
-    <div class="step" data-scene="comm-a">
-      <div class="step__section-label" style="color:var(--c-comm); border-color:#E8B5C0;">HABIT 04 &nbsp;·&nbsp; COMMITMENT</div>
-      <h3 class="step__headline">Trust is built one follow-through at a time.</h3>
-      <p class="step__body">
-        When a person leaves CASL, they are often in a difficult situation. They are counting on us to do what we said. If we do not follow up, they do not come back. And they tell the people they know.
-      </p>
-      <p class="step__body">
-        Commitment means every promise has a name, a date, and a record.
-      </p>
-    </div>
-
-    <div class="step step--looks" data-scene="comm-b">
-      <div class="step__section-label yes">LOOKS LIKE</div>
-      <h3 class="step__headline">Written down. Logged. Done.</h3>
-      <div class="example-card yes"><span class="prefix">+</span>"I will follow up with you by Thursday." You log it in the system before the meeting is over. The record is made before you leave the room.</div>
-      <div class="example-card yes"><span class="prefix">+</span>Before the first appointment in a program, the staff member calls to confirm. Not an automated message. A real call from a real person.</div>
-      <div class="example-card yes"><span class="prefix">+</span>Every referral is logged. If it is not in the system, it did not happen. You check that it happened.</div>
-      <div class="example-card yes"><span class="prefix">+</span>You told a colleague you would send something by 3pm. At 2:45, you either send it or you tell them you need more time. You do not go quiet.</div>
-      <div class="example-card yes"><span class="prefix">+</span>If the answer is "we cannot help you right now," that is also a commitment. You say when you can. You say what to do in the meantime. You name the date you will follow up. Then you do it.</div>
-
-      <div class="manager-note">
-        <div class="manager-note__label">For managers</div>
-        <div class="manager-note__text">You build the system so follow-through does not depend on each person's motivation alone. When everyone is busy, motivation is not enough. A note in a personal diary is not a system. A required field in Salesforce with a follow-up date is a system. You check that follow-ups happened. When they did not, you fix the system, not only the person.</div>
-        <div class="manager-note__action">Your action: This week, check that follow-ups from last week happened. If they did not, ask what got in the way — and fix that, not only the person.</div>
-      </div>
-    </div>
-
-    <div class="step" data-scene="comm-c">
-      <div class="step__section-label no">DOES NOT LOOK LIKE</div>
-      <h3 class="step__headline">A promise with no name, no date, and no record is not a commitment.</h3>
-      <div class="example-card no"><span class="prefix">x</span>A person leaves with "someone will contact you." No name. No date. No follow-up. The referral mentioned in the meeting is never logged and never happens. The person waits. Nothing comes.</div>
-    </div>
-
+    <div class="step" data-scene="comm-a"><div class="step__section-label" style="color:var(--c-comm);border-color:#E8B5C0;">HABIT 04 &nbsp;·&nbsp; COMMITMENT</div><h3 class="step__headline">Trust is built one follow-through at a time.</h3><p class="step__body">When a person leaves CASL, they are often in a difficult situation. They are counting on us to do what we said. If we do not follow up, they do not come back. And they tell the people they know.</p><p class="step__body">Commitment means every promise has a name, a date, and a record.</p></div>
+    <div class="step step--looks" data-scene="comm-b"><div class="step__section-label yes">LOOKS LIKE</div><h3 class="step__headline">Written down. Logged. Done.</h3><div class="example-card yes"><span class="prefix">+</span>"I will follow up with you by Thursday." You log it in the system before the meeting is over. The record is made before you leave the room.</div><div class="example-card yes"><span class="prefix">+</span>Before the first appointment in a program, the staff member calls to confirm. Not an automated message. A real call from a real person.</div><div class="example-card yes"><span class="prefix">+</span>Every referral is logged. If it is not in the system, it did not happen. You check that it happened.</div><div class="example-card yes"><span class="prefix">+</span>You told a colleague you would send something by 3pm. At 2:45, you either send it or you tell them you need more time. You do not go quiet.</div><div class="example-card yes"><span class="prefix">+</span>If the answer is "we cannot help you right now," that is also a commitment. You say when you can. You say what to do in the meantime. You name the date you will follow up. Then you do it.</div><div class="manager-note"><div class="manager-note__label">For managers</div><div class="manager-note__text">You build the system so follow-through does not depend on each person's motivation alone. When everyone is busy, motivation is not enough. A note in a personal diary is not a system. A required field in Salesforce with a follow-up date is a system. You check that follow-ups happened. When they did not, you fix the system, not only the person.</div><div class="manager-note__action">Your action: This week, check that follow-ups from last week happened. If they did not, ask what got in the way — and fix that, not only the person.</div></div></div>
+    <div class="step" data-scene="comm-c"><div class="step__section-label no">DOES NOT LOOK LIKE</div><h3 class="step__headline">A promise with no name, no date, and no record is not a commitment.</h3><div class="example-card no"><span class="prefix">x</span>A person leaves with "someone will contact you." No name. No date. No follow-up. The referral mentioned in the meeting is never logged and never happens. The person waits. Nothing comes.</div></div>
   </div>
 </div>
 
-
-<!-- ═══════ C 5 — CONTINUOUS IMPROVEMENT ════════════════ -->
-<section class="chapter-intro" style="background: var(--c-ci);">
-  <div class="bg-letter">C</div>
-  <div class="chapter-intro__num">Habit 05 of 05</div>
-  <h2 class="chapter-intro__name">Continuous<br>Improvement.</h2>
-  <p class="chapter-intro__def">Learn from what happened so next time is better.</p>
-</section>
+<section class="chapter-intro" style="background:var(--c-ci);"><div class="bg-letter">C</div><div class="chapter-intro__num">Habit 05 of 05</div><h2 class="chapter-intro__name">Continuous<br>Improvement.</h2><p class="chapter-intro__def">Learn from what happened so next time is better.</p></section>
 
 <div class="scroll-section" id="section-ci">
   <div class="scroll-section__visual">
-
-    <div class="visual-scene active" data-scene-id="ci-a">
-      <div class="vs__num">Habit 05 &nbsp;·&nbsp; CONT. IMPROVEMENT</div>
-      <div class="vs__name" style="font-size:2.4rem;">Continuous<br>Improvement.</div>
-      <div class="vs__def">Learn from what happened so next time is better.</div>
-      <div class="vs__dir">
-        <div class="vs__dir-item">
-          <span class="vs__dir-label">For clients</span>
-          <span class="vs__dir-text">Their experience tells us what to fix. We use it.</span>
-        </div>
-        <div class="vs__dir-item">
-          <span class="vs__dir-label">For colleagues</span>
-          <span class="vs__dir-text">Share what worked and what did not. Together.</span>
-        </div>
-        <div class="vs__dir-item">
-          <span class="vs__dir-label">For yourself</span>
-          <span class="vs__dir-text">Ask: what is one thing I can do better next time?</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="visual-scene" data-scene-id="ci-b" style="background: var(--c-ci);">
-      <div class="vs__num">Habit 05 &nbsp;·&nbsp; CONT. IMPROVEMENT</div>
-      <div class="vs__name">What it looks like.</div>
-      <div class="vs__def">Small fixes. Said out loud. Made together.</div>
-    </div>
-
-    <div class="visual-scene" data-scene-id="ci-c">
-      <div class="vs__num">Habit 05 &nbsp;·&nbsp; CONT. IMPROVEMENT</div>
-      <div class="vs__name">What it does not look like.</div>
-      <div class="vs__def">The same problem for six months because no one said anything.</div>
-    </div>
-
+    <div class="visual-scene active" data-scene-id="ci-a"><div class="vs__num">Habit 05 &nbsp;·&nbsp; CONT. IMPROVEMENT</div><div class="vs__name" style="font-size:2.4rem;">Continuous<br>Improvement.</div><div class="vs__def">Learn from what happened so next time is better.</div><div class="vs__dir"><div class="vs__dir-item"><span class="vs__dir-label">For clients</span><span class="vs__dir-text">Their experience tells us what to fix. We use it.</span></div><div class="vs__dir-item"><span class="vs__dir-label">For colleagues</span><span class="vs__dir-text">Share what worked and what did not. Together.</span></div><div class="vs__dir-item"><span class="vs__dir-label">For yourself</span><span class="vs__dir-text">Ask: what is one thing I can do better next time?</span></div></div></div>
+    <div class="visual-scene" data-scene-id="ci-b" style="background:var(--c-ci);"><div class="vs__num">Habit 05 &nbsp;·&nbsp; CONT. IMPROVEMENT</div><div class="vs__name">What it looks like.</div><div class="vs__def">Small fixes. Said out loud. Made together.</div></div>
+    <div class="visual-scene" data-scene-id="ci-c"><div class="vs__num">Habit 05 &nbsp;·&nbsp; CONT. IMPROVEMENT</div><div class="vs__name">What it does not look like.</div><div class="vs__def">The same problem for six months because no one said anything.</div></div>
   </div>
-
   <div class="scroll-section__text">
-
-    <div class="step" data-scene="ci-a">
-      <div class="step__section-label" style="color:var(--c-ci); border-color:#B5C5E0;">HABIT 05 &nbsp;·&nbsp; CONTINUOUS IMPROVEMENT</div>
-      <h3 class="step__headline">A mistake is only a problem if we repeat it.</h3>
-      <p class="step__body">
-        When something goes wrong, the question is not who to blame. The question is: what do we do differently next time?
-      </p>
-      <p class="step__body">
-        Speaking up can feel risky. We know that. We are working to make CASL a place where naming a problem is seen as a contribution, not a complaint. That takes time. We are building it on purpose.
-      </p>
-      <p class="step__body">
-        Continuous Improvement is not a big project. It is a small habit. It is asking, after every interaction: what is one thing I can do better next time?
-      </p>
-    </div>
-
-    <div class="step step--looks" data-scene="ci-b">
-      <div class="step__section-label yes">LOOKS LIKE</div>
-      <h3 class="step__headline">Small fixes. Said out loud. Made together.</h3>
-      <div class="example-card yes"><span class="prefix">+</span>You bring a problem to your team meeting before it becomes a bigger issue. "Here is something that is not working. Here is what I think we should try."</div>
-      <div class="example-card yes"><span class="prefix">+</span>"Here is what I would do differently next time." Said without defensiveness. Said as something normal.</div>
-      <div class="example-card yes"><span class="prefix">+</span>The pilot showed something that did not work. You do not defend the original version. You change it.</div>
-      <div class="example-card yes"><span class="prefix">+</span>A client shares feedback, good or difficult. You write it down. You bring it to the team. You use it to make a change.</div>
-
-      <div class="manager-note">
-        <div class="manager-note__label">For managers</div>
-        <div class="manager-note__text">Your job is not just to say it is safe to speak up. Your job is to show it. You show it by what you do the first time someone names a problem. People learn quickly whether speaking up leads to change or to trouble. When someone names a problem, thank them. Then do something about it. When you do that, you build trust. That is how this habit takes root.</div>
-        <div class="manager-note__action">Your action: The next time someone on your team names a problem, thank them out loud, in front of the group. Then tell them what you will do about it, and when.</div>
-      </div>
-    </div>
-
-    <div class="step" data-scene="ci-c">
-      <div class="step__section-label no">DOES NOT LOOK LIKE</div>
-      <h3 class="step__headline">Quiet is not the same as everything being fine.</h3>
-      <div class="example-card no"><span class="prefix">x</span>A workaround used for six months becomes the way things are done because no one named it as a problem. When we turn someone away, we do not record it, so we cannot see the pattern or change it.</div>
-    </div>
-
+    <div class="step" data-scene="ci-a"><div class="step__section-label" style="color:var(--c-ci);border-color:#B5C5E0;">HABIT 05 &nbsp;·&nbsp; CONTINUOUS IMPROVEMENT</div><h3 class="step__headline">A mistake is only a problem if we repeat it.</h3><p class="step__body">When something goes wrong, the question is not who to blame. The question is: what do we do differently next time?</p><p class="step__body">Speaking up can feel risky. We know that. We are working to make CASL a place where naming a problem is seen as a contribution, not a complaint. That takes time. We are building it on purpose.</p><p class="step__body">Continuous Improvement is not a big project. It is a small habit. It is asking, after every interaction: what is one thing I can do better next time?</p></div>
+    <div class="step step--looks" data-scene="ci-b"><div class="step__section-label yes">LOOKS LIKE</div><h3 class="step__headline">Small fixes. Said out loud. Made together.</h3><div class="example-card yes"><span class="prefix">+</span>You bring a problem to your team meeting before it becomes a bigger issue. "Here is something that is not working. Here is what I think we should try."</div><div class="example-card yes"><span class="prefix">+</span>"Here is what I would do differently next time." Said without defensiveness. Said as something normal.</div><div class="example-card yes"><span class="prefix">+</span>The pilot showed something that did not work. You do not defend the original version. You change it.</div><div class="example-card yes"><span class="prefix">+</span>A client shares feedback, good or difficult. You write it down. You bring it to the team. You use it to make a change.</div><div class="manager-note"><div class="manager-note__label">For managers</div><div class="manager-note__text">Your job is not just to say it is safe to speak up. Your job is to show it. You show it by what you do the first time someone names a problem. People learn quickly whether speaking up leads to change or to trouble. When someone names a problem, thank them. Then do something about it. When you do that, you build trust. That is how this habit takes root.</div><div class="manager-note__action">Your action: The next time someone on your team names a problem, thank them out loud, in front of the group. Then tell them what you will do about it, and when.</div></div></div>
+    <div class="step" data-scene="ci-c"><div class="step__section-label no">DOES NOT LOOK LIKE</div><h3 class="step__headline">Quiet is not the same as everything being fine.</h3><div class="example-card no"><span class="prefix">x</span>A workaround used for six months becomes the way things are done because no one named it as a problem. When we turn someone away, we do not record it, so we cannot see the pattern or change it.</div></div>
   </div>
 </div>
 
-
-<!-- ═══════ CLOSING ═══════════════════════════════════════ -->
 <section class="closing">
   <div class="closing__label">All five habits together.</div>
   <h2 class="closing__headline">When all five habits are working, something real happens.</h2>
-  <p class="closing__body">
-    A client came to CASL after a serious accident. He had no stable housing, missed medical appointments, and personal belongings held by a former landlord. He was alone and did not know where to start.
-  </p>
-  <p class="closing__body">
-    The Illinois Welcoming Center was his first door. Within days, Behavioral Health, Legal Services, and a case worker were all working together around him. Eight case management sessions, no cost to him. By the end, he had his belongings back, his medical appointments completed, and a safe place to live.
-  </p>
-  <p class="closing__body">
-    That happened because staff coordinated across teams without being asked. Because someone made a commitment and followed through. Because no one sent him to another desk and left him to explain himself again.
-  </p>
-  <p class="closing__body">
-    That is ONE CASL. A way of working, every day, for every person.
-  </p>
+  <p class="closing__body">A client came to CASL after a serious accident. He had no stable housing, missed medical appointments, and personal belongings held by a former landlord. He was alone and did not know where to start.</p>
+  <p class="closing__body">The Illinois Welcoming Center was his first door. Within days, Behavioral Health, Legal Services, and a case worker were all working together around him. Eight case management sessions, no cost to him. By the end, he had his belongings back, his medical appointments completed, and a safe place to live.</p>
+  <p class="closing__body">That happened because staff coordinated across teams without being asked. Because someone made a commitment and followed through. Because no one sent him to another desk and left him to explain himself again.</p>
+  <p class="closing__body">That is ONE CASL. A way of working, every day, for every person.</p>
   <div class="closing__grid">
-    <div class="closing__c" style="background: rgba(236,29,39,0.2);">
-      <div class="closing__c-name">Care</div>
-      <div class="closing__c-val">Inclusivity</div>
-    </div>
-    <div class="closing__c" style="background: rgba(0,30,96,0.35);">
-      <div class="closing__c-name">Coordination</div>
-      <div class="closing__c-val">Collaboration</div>
-    </div>
-    <div class="closing__c" style="background: rgba(203,136,38,0.28);">
-      <div class="closing__c-name">Clarity</div>
-      <div class="closing__c-val">Empowerment</div>
-    </div>
-    <div class="closing__c" style="background: rgba(139,26,46,0.3);">
-      <div class="closing__c-name">Commitment</div>
-      <div class="closing__c-val">Resiliency</div>
-    </div>
-    <div class="closing__c" style="background: rgba(27,77,142,0.3);">
-      <div class="closing__c-name">Continuous Improvement</div>
-      <div class="closing__c-val">Transformation</div>
-    </div>
+    <div class="closing__c" style="background:rgba(236,29,39,0.2);"><div class="closing__c-name">Care</div><div class="closing__c-val">Inclusivity</div></div>
+    <div class="closing__c" style="background:rgba(0,30,96,0.35);"><div class="closing__c-name">Coordination</div><div class="closing__c-val">Collaboration</div></div>
+    <div class="closing__c" style="background:rgba(203,136,38,0.28);"><div class="closing__c-name">Clarity</div><div class="closing__c-val">Empowerment</div></div>
+    <div class="closing__c" style="background:rgba(139,26,46,0.3);"><div class="closing__c-name">Commitment</div><div class="closing__c-val">Resiliency</div></div>
+    <div class="closing__c" style="background:rgba(27,77,142,0.3);"><div class="closing__c-name">Continuous Improvement</div><div class="closing__c-val">Transformation</div></div>
   </div>
 </section>
-
-
 
 <footer class="site-footer">
   <p>ONE CASL — The 5 Habits &nbsp;·&nbsp; CASL &nbsp;·&nbsp; April 2026 &nbsp;·&nbsp; Internal &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; 100% Human LLC</p>
   <div class="site-footer__mark">CASL</div>
 </footer>
 
-<!-- ═══════ JAVASCRIPT ════════════════════════════════════ -->
 <script>
-(function() {
+(function(){
   'use strict';
-  var isMobile = window.innerWidth < 768;
-
-  var progressBar = document.getElementById('progress-bar');
-  window.addEventListener('scroll', function() {
-    var scrollTop = window.scrollY || window.pageYOffset;
-    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    progressBar.style.width = (docHeight > 0 ? (scrollTop / docHeight * 100) : 0) + '%';
-  }, { passive: true });
-
-  var sections = document.querySelectorAll('.scroll-section');
-  sections.forEach(function(section) {
-    var scenes = {};
-    section.querySelectorAll('.visual-scene[data-scene-id]').forEach(function(sc) {
-      scenes[sc.dataset.sceneId] = sc;
-    });
-    function activateScene(id) {
-      if (!scenes[id]) return;
-      Object.values(scenes).forEach(function(s) { s.classList.remove('active'); });
-      scenes[id].classList.add('active');
-    }
-    var steps = section.querySelectorAll('.step[data-scene]');
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) { activateScene(entry.target.dataset.scene); }
-      });
-    }, {
-      threshold: 0,
-      rootMargin: isMobile ? '-' + Math.round(window.innerHeight * 0.52) + 'px 0px -10% 0px' : '-15% 0px -55% 0px'
-    });
-    steps.forEach(function(step) { observer.observe(step); });
-  });
+  var isMobile=window.innerWidth<768;
+  var progressBar=document.getElementById('progress-bar');
+  window.addEventListener('scroll',function(){var scrollTop=window.scrollY||window.pageYOffset;var docHeight=document.documentElement.scrollHeight-window.innerHeight;progressBar.style.width=(docHeight>0?(scrollTop/docHeight*100):0)+'%';},{passive:true});
+  var sections=document.querySelectorAll('.scroll-section');
+  sections.forEach(function(section){var scenes={};section.querySelectorAll('.visual-scene[data-scene-id]').forEach(function(sc){scenes[sc.dataset.sceneId]=sc;});function activateScene(id){if(!scenes[id])return;Object.values(scenes).forEach(function(s){s.classList.remove('active');});scenes[id].classList.add('active');}var steps=section.querySelectorAll('.step[data-scene]');var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){activateScene(entry.target.dataset.scene);}});},{threshold:0,rootMargin:isMobile?'-'+Math.round(window.innerHeight*0.52)+'px 0px -10% 0px':'-15% 0px -55% 0px'});steps.forEach(function(step){observer.observe(step);});});
 })();
 </script>
-
 </body>
 </html>
